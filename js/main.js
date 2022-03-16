@@ -44,7 +44,7 @@ let winner; // this can be 3 things, win, lose, tie, or null
 // Message Container - h2
 const domMessage = document.querySelector('h2');
 // The Game Board
-const gameBoard = document.querySelector('game-board')
+const gameBoard = document.querySelector('.game-board')
 // The Game Squares
 const domSquares = document.querySelectorAll('.square');
 // A 'Reset Game' Button
@@ -61,9 +61,24 @@ resetButton.addEventListener('click', init);
 
 /*----- Functions -----*/
 // Initialize (start) game
+// init()
+function init() {
+    console.log('Init function called!')
+};
 
 // Handle user interaction
-
-// Render messages to the DOM
+// handleMove()
+function handleMove() {
+    console.log('Handlemove function called!')
+};
 
 // Check for 3 in a row - or winner (main game logic)
+function checkForWinner() {
+    console.log('Checkforwin function called!')
+};
+
+// Render messages to the DOM
+// render()
+function render() {
+    console.log('Render function called')
+};
