@@ -2,6 +2,11 @@ body {
     background-color: black;
 }
 
+header {
+    color: white;
+    text-align: center;
+}
+
 main {
     height: 80vh;
     display: flex;
