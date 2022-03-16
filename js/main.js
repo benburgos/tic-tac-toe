@@ -66,8 +66,9 @@ function init() {
     console.log('Init function called!')
     // we need a data set to keep track of our player moves
     board = new Array(9).fill(null); // creates an array with nine positions, .fill will tell it what to put in those positions
-    turn = 1; // X goes first, referncing the PLAYERS object
+    turn = 1; // X goes first, referencing the PLAYERS object
     winner = null; // set initial winner to no one
+    render();
 };
 
 // start the game on page load
@@ -79,19 +80,49 @@ function handleMove(event) {
     console.log('Handlemove function called!')
     console.log(`${event.target.dataset.square} was clicked!`) // .dataset will pull the data-square values
     const squareNumber = parseInt(event.target.dataset.square); // stores the clicked box as a variable, because it's a string, we need to use parseInt
+    if (board[squareNumber] || winner) { // checks if the box clicked is already populated OR if winner is not null returns out if true
+        return
+    }
     board[squareNumber] = turn // set the index of the board array so we know that the spot has been claimed
-    turn *= -1 // sets the turn to the next player, can also be written turn = turn * -1
     winner = checkForWinner(); // check for winner
+    turn *= -1 // sets the turn to the next player, can also be written turn = turn * -1
     render() // renders the message to the user
 };
 
 // Check for 3 in a row - or winner (main game logic)
 function checkForWinner() {
     console.log('Checkforwin function called!')
+    // Loops through all possible winning combinations and checks if the current selections match
+    for (let index in COMBOS) {
+        if (
+            board[COMBOS[index][0]] === turn &&
+            board[COMBOS[index][1]] === turn &&
+            board[COMBOS[index][2]] === turn
+            ) {
+                return turn
+            }
+    }
+
+    if (board.includes(null)) {
+        return null
+    }
+    return 'tie'
 };
 
 // Render messages to the DOM
 // render()
 function render() {
     console.log('Render function called')
+    // puts an X or O on the board, mapped from the board variable
+    board.forEach(function(value, index) {
+        domSquares[index].textContent = PLAYERS[value]
+    })
+    // displays if there is a winner, a tie, or whose turn it is
+    if (!winner) {
+        domMessage.textContent = `${PLAYERS[turn]}'s turn` // tell player whose turn it is
+    } else if (winner === 'tie') {
+        domMessage.textContent = 'Tie game!' // tell the player it's a tie
+    } else {
+        domMessage.textContent = `${PLAYERS[winner]} wins!` // tell the player the winner
+    }
 };
