@@ -5,7 +5,7 @@ console.log('JS is up and running!')
 const PLAYERS = {
     '1': 'X',
     '-1': 'O',
-}
+};
 
 // Winning Combinations
 /*
@@ -23,7 +23,7 @@ const COMBOS = [
     [2,5,8],
     [0,4,8],
     [2,4,6]
-]
+];
 
 
 /*----- App's State (Variables) -----*/
@@ -42,17 +42,28 @@ let winner; // this can be 3 things, win, lose, tie, or null
 
 /*----- Cached Element References -----*/
 // Message Container - h2
+const domMessage = document.querySelector('h2');
+// The Game Board
+const gameBoard = document.querySelector('game-board')
 // The Game Squares
+const domSquares = document.querySelectorAll('.square');
 // A 'Reset Game' Button
+const resetButton = document.querySelector('button');
 
 
 /*----- Event Listeners -----*/
-// Mouse click on the 9 squares
+// Mouse click on the 9 squares - using event delegation
+gameBoard.addEventListener('click', handleMove);
 // Mouse click on the reset button
+resetButton.addEventListener('click', init);
+
 // Optional - User intiiates game start
 
 /*----- Functions -----*/
 // Initialize (start) game
-// Render messages to the DOM
-// Check for 3 in a row - or winner (main game logic)
+
 // Handle user interaction
+
+// Render messages to the DOM
+
+// Check for 3 in a row - or winner (main game logic)
